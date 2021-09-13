@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Paper from "../components/Paper";
 import Header from "../components/Header";
@@ -6,13 +6,19 @@ import TodoForm from "../components/TodoForm";
 import Todos from "../components/Todos";
 
 const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { text: "Learning React!" },
+    { text: "Learning React Styling" },
+    { text: "Learning React Component" },
+    { text: "Learning React Hooks" }
+  ]);
   return (
     <Paper>
       <Header />
       <TodoForm />
-      <Todos />
+      <Todos todos={todos} />
     </Paper>
   );
-}
+};
 
-export default TodoList
+export default TodoList;
