@@ -5,8 +5,7 @@ const TodoForm = ({ addTodo }) => {
   const [value, setValue] = useState("");
 
   const handleFormSubmit = (e) => {
-
-    // mencegah behavior submit form yaitu refresh
+    // mencegah default behavior submit form yaitu refresh
     e.preventDefault();
 
     if (!value) {
@@ -38,7 +37,7 @@ const TodoForm = ({ addTodo }) => {
 };
 
 TodoForm.propTypes = {
-  addTodo: PropTypes.func.isReaquired
+  addTodo: PropTypes.func.isRequired
 }
 
 export default TodoForm;
