@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types"
 
-const TodoForm = ({ addTodo }) => {
+// js convention
+const TodoForm = ({ addTodo, showAdd }) => {
   const [value, setValue] = useState("");
 
   const handleFormSubmit = (e) => {
@@ -13,31 +14,40 @@ const TodoForm = ({ addTodo }) => {
       return
       //kode apapun di bawah if tidak dijalankan, krn sudah return
     }
+
+    if (value.length > 40) {
+      alert("Please create a shorter todo text!")
+      setValue("")
+      return
+    }
     
     addTodo(value)
     alert(value);
     setValue("");
   };
 
-  // console.log("value ", value);
-
-  return (
-    <section className="add">
-      <form action="" className="add-form" onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          className="add-input"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <button className="add-btn main-black-color">Add</button>
-      </form>
-    </section>
-  );
+  if (showAdd) {
+    return (
+      <section className="add">
+        <form action="" className="add-form" onSubmit={handleFormSubmit}>
+          <input
+            type="text"
+            className="add-input"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button className="add-btn main-black-color">Add</button>
+        </form>
+      </section>
+    );
+  } else {
+    return null
+  }
 };
 
 TodoForm.propTypes = {
-  addTodo: PropTypes.func.isRequired
+  addTodo: PropTypes.func.isRequired,
+  showAdd: PropTypes.bool.isRequired
 }
 
 export default TodoForm;
