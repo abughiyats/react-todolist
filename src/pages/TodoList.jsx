@@ -10,14 +10,18 @@ const TodoList = () => {
     { text: "Learning React!", isCompleted: false },
     { text: "Learning React Styling", isCompleted: false },
     { text: "Learning React Component", isCompleted: false },
+    { text: "Learning React Component", isCompleted: false },
     { text: "Learning React Hooks", isCompleted: false }
   ]);
   const [showAdd, setShowAdd] = useState(false);
 
   const addTodo = (value) => {
-    const addedTodo = [...todos, { text: value, isCompleted: false }];
-
-    setTodos(addedTodo);
+    if (todos.length < 6) {
+      const addedTodo = [...todos, { text: value, isCompleted: false }];
+      setTodos(addedTodo);
+    } else {
+      alert("only 10 todos is allowed");
+    }
   };
 
   const completeTodo = (index) => {
@@ -26,13 +30,18 @@ const TodoList = () => {
 
     setTodos(addedTodo);
   };
+  const clearTodos = () => setTodos([]);
   const showAddToggle = () => setShowAdd(!showAdd);
 
   console.log("todos", todos);
 
   return (
     <Paper>
-      <Header showAddToggle={showAddToggle} showAdd={showAdd} />
+      <Header
+        showAddToggle={showAddToggle}
+        showAdd={showAdd}
+        clearTodos={clearTodos}
+      />
       <TodoForm addTodo={addTodo} showAdd={showAdd} />
       <Todos todos={todos} completeTodo={completeTodo} />
     </Paper>
